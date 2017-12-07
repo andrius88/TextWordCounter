@@ -1,0 +1,65 @@
+package lt.and.pac;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class Starter {
+
+	public static void main(String[] args) {
+	
+		FileReader fileReaderIns = new FileReader();
+		String fileText = new String();
+		
+		ArrayList<File> txtFileList = fileReaderIns.buildFileList();
+		
+		/*for (File file : txtFileList){
+			System.out.println(file.getName());
+		}*/
+		
+		fileText = fileReaderIns.readAllTxtFiles();
+		System.out.println(fileText);
+		
+		/*try{
+			fileText = fileReaderIns.readFile();
+		} catch(Exception e) {
+	         System.out.println("Exception thrown  :" + e);
+	    }
+		
+		System.out.println(fileText);
+		
+		ArrayList<Row> rows = WordCounter.worldSeparator(fileText);
+		ArrayList<Row> rowsCounted = WordCounter.worldCounter(rows);
+		for (Row rowlocal : rowsCounted) {
+			System.out.println(rowlocal.getWord() + "\t" + rowlocal.getCount());
+		}*/
+		
+		
+/*		ArrayList<Row> rows = new ArrayList<>();
+        Row row;
+        // Insert the columns for each row
+        //             First Name, Last Name, Age
+        row = new Row("John", 30);
+        rows.add(row);
+        row = new Row("Jane", 29);
+        rows.add(row);
+        row = new Row("Mary",  1);
+        rows.add(row);
+
+        // Show the Array
+        //
+        System.out.println("Word\t Count");
+        System.out.println("----------------------");
+        for (Row printRow : rows)
+        {
+            System.out.println(
+                    printRow.getWord() + "\t " +
+                    printRow.getCount());
+        }*/
+    }
+}
+
+
+
+
+
+

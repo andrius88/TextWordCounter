@@ -1,0 +1,46 @@
+package lt.and.pac.textwordcounter;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class Starter {
+
+	public static void main(String[] args) {
+	
+		String pathOfProject = new String("C:\\Users\\Andrius\\Metasite\\");
+		String filesText = new String();
+		ArrayList<WordCounter> wordCounterThredList = new ArrayList<>();
+		
+			//Reads all txt files into single string
+		MyFileReader fileReaderIns = new MyFileReader(pathOfProject);
+		ArrayList<File> txtFileList = fileReaderIns.buildFileList();
+		filesText = fileReaderIns.readAllTxtFiles();
+		
+		System.out.println("All txt files appended to one string: ");
+		System.out.println(filesText);
+		System.out.println();
+		
+		String[] arrayOfWords = WordSeparator.separateWords(filesText);
+		
+		WordCounter wordCounterIns1 = new WordCounter(pathOfProject, 'A', 'G', arrayOfWords);
+		WordCounter wordCounterIns2 = new WordCounter(pathOfProject, 'H', 'N', arrayOfWords);
+		WordCounter wordCounterIns3 = new WordCounter(pathOfProject, 'O', 'U', arrayOfWords);
+		WordCounter wordCounterIns4 = new WordCounter(pathOfProject, 'V', 'Z', arrayOfWords);
+		
+		wordCounterThredList.add(wordCounterIns1);
+		wordCounterThredList.add(wordCounterIns2);
+		wordCounterThredList.add(wordCounterIns3);
+		wordCounterThredList.add(wordCounterIns4);
+		
+			// multithredning SARTS 
+		for (WordCounter wordCounterThred : wordCounterThredList) {
+			wordCounterThred.start();					
+		}
+    }
+}
+
+
+
+
+
+

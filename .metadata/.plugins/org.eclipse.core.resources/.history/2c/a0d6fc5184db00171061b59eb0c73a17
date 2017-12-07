@@ -1,0 +1,26 @@
+package lt.and.pac.textwordcounter;
+
+import java.io.File;
+import java.io.IOException;
+
+public class ParentDirectoryFinder {
+
+	public static String findParantDirectory (){
+		
+		String parentDirectoryStr = null;
+		
+		try {
+			File currentDirectory = new File(new File(".").getAbsolutePath());
+			File parentDirectory = new File(currentDirectory.getParentFile().getParent());
+			parentDirectoryStr = parentDirectory.getCanonicalPath() + "\\";
+			System.out.println("ParentDirectoryFinder.findParantDirectory: " + parentDirectoryStr);
+			
+		} catch (IOException e) {
+			System.out.println("IOException thrown  :" + e);
+		}
+		
+		return parentDirectoryStr;
+	}
+	
+	
+}

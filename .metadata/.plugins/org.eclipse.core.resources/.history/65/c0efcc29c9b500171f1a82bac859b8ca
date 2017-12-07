@@ -1,0 +1,34 @@
+package lt.and.pac;
+
+import java.awt.List;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//System.out.println("A" == "A");
+		
+		String[] allFileList = new File("C:\\Users\\Andrius\\Metasite\\").list();
+		String fileExtention = "";
+		String extentionTtx = "txt";
+		
+		for (int i=0; i < allFileList.length; i++){
+			//System.out.println(allFileList[i].substring(allFileList[i].length()-3, allFileList[i].length()));
+			fileExtention = allFileList[i].substring(allFileList[i].length()-3, allFileList[i].length());
+			if (Objects.equals(fileExtention.toString(), "txt".toString())){
+				
+				
+				System.out.println(fileExtention + " i: " + i + "\n");
+				System.out.println(i);
+				
+				
+			}
+		}
+			
+	}
+
+}

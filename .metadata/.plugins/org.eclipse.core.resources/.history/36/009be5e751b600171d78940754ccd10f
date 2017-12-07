@@ -1,0 +1,79 @@
+package lt.and.pac;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class WordCounter extends Thread{
+	
+	private Thread threadIns;
+	///private int thredNumber;
+	private String thredName;
+	
+	private Character sratChar;
+	private Character endChar;
+	private ArrayList<Row> ListOfRows;
+	
+	public WordCounter(char sratChar, char endChar){
+		this.sratChar = sratChar;
+		this.endChar = endChar;
+		this.ListOfRows = new ArrayList<>();
+		this.thredName = sratChar + "-" + endChar;
+	}
+
+	public void run() {
+		
+	}
+
+	
+
+
+	
+	public  void buildRowsArrayList(String[] arrayOfWordsIn){
+		
+		String currentWord = new String();
+		
+		for (int i=0; i<arrayOfWordsIn.length; i++){
+			currentWord = arrayOfWordsIn[i];
+			if (!currentWord.isEmpty()){
+				if (currentWord.charAt(0) >= sratChar && currentWord.charAt(0) <= endChar
+					|| currentWord.charAt(0) >= Character.toLowerCase(sratChar)  
+					&& currentWord.charAt(0) <= Character.toLowerCase(endChar)){
+					Row newRow = new Row (currentWord, 1);
+					ListOfRows.add(newRow);
+				}
+			}
+		}
+		
+		/*for(Row row : ListOfRows){
+			System.out.println(row.getWord() + " " + row.getCount());
+		}*/
+		
+		//return ListOfRows;
+	}
+	
+	public ArrayList<Row> countWords(){
+		
+		String currentWord = new String();
+		int currentCount = 0;
+		
+		for (int i=0; i<ListOfRows.size(); i++){
+			if (!ListOfRows.get(i).getWord().isEmpty()){
+				currentWord = ListOfRows.get(i).getWord();
+				currentCount = 1;
+				Row newRow = new Row(currentWord, currentCount);
+			
+				for (int j=i+1; j<ListOfRows.size(); j++){
+					if (!currentWord.toString().isEmpty() 
+						&& Objects.equals(currentWord.toString(), ListOfRows.get(j).getWord().toString())){
+						
+						newRow.increment();
+						ListOfRows.get(j).deleteWord();
+						ListOfRows.get(j).deleteCount();
+					}
+				}
+				countedListOfRows.add(newRow);
+			}
+		}	
+		return countedListOfRows;
+	}
+}

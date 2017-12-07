@@ -1,0 +1,54 @@
+package lt.and.pac.textwordcounter;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+
+	public class MyFileReader {
+	    
+		String pathOfProject;
+		String[] allFileList;
+		String fileExtention = "";
+		ArrayList<File> fileList = new ArrayList<File>();
+		
+		public MyFileReader (String pathOfProject){
+			this.pathOfProject = pathOfProject;
+			allFileList = new File(pathOfProject).list();
+		}
+		
+		public ArrayList<File> buildFileList(){
+			
+			for (int i=0; i < allFileList.length; i++){
+				fileExtention = allFileList[i].substring(allFileList[i].length()-3, allFileList[i].length());
+				if (Objects.equals(fileExtention.toString(), "txt".toString())){
+					File file = new File(pathOfProject + allFileList[i]);
+					fileList.add(file);
+				}
+			}
+			return fileList;
+		}
+	
+		public String readAllTxtFiles(){
+			String fileText = new String();
+			for (File file : fileList){
+					//System.out.println(file.getName());
+				try{
+					File fileIns = new File(pathOfProject + file.getName());
+			        Scanner sc = new Scanner(fileIns);
+			        while(sc.hasNextLine()){
+			        	fileText = fileText  + "\n" + sc.nextLine();
+			        }
+					//fileText = fileReaderIns.readFile();
+			} catch(Exception e) {
+		         System.out.println("Exception thrown  :" + e);
+		    }
+				
+			}
+		return fileText;	
+		}
+	}
+		
+
+	
+

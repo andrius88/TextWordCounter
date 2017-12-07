@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Exercise_171021&apos; to &apos;TextWordCounter&apos;" description="Rename resource &apos;Exercise_171021&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Exercise_171021" name="TextWordCounter" stamp="1512672689993" updateReferences="true"/>
+</session>

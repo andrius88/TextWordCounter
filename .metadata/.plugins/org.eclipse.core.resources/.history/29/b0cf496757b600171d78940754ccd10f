@@ -1,0 +1,52 @@
+package lt.and.pac;
+
+import java.io.File;
+import java.util.ArrayList;
+
+public class Starter {
+
+	public static void main(String[] args) {
+	
+		String pathOfProject = new String("C:\\Users\\Andrius\\Metasite\\");
+		String fileText = new String();
+		ArrayList<WordCounter> wordCounterThredList = new ArrayList<>();
+		
+			//Reads all txt files into single string
+		FileReader fileReaderIns = new FileReader(pathOfProject);
+		ArrayList<File> txtFileList = fileReaderIns.buildFileList();
+		fileText = fileReaderIns.readAllTxtFiles();
+		
+		System.out.println(fileText);
+		
+		String[] arrayOfWords = WordSeparator.separateWorls(fileText);
+		
+		WordCounter wordCounterIns1 = new WordCounter('A', 'G', arrayOfWords);
+		WordCounter wordCounterIns2 = new WordCounter('H', 'N', arrayOfWords);
+		WordCounter wordCounterIns3 = new WordCounter('O', 'U', arrayOfWords);
+		WordCounter wordCounterIns4 = new WordCounter('V', 'Z', arrayOfWords);
+		
+		wordCounterThredList.add(wordCounterIns1);
+		wordCounterThredList.add(wordCounterIns2);
+		//wordCounterThredList.add(wordCounterIns3);
+		//wordCounterThredList.add(wordCounterIns4);
+		
+		for (WordCounter wordCounterThred : wordCounterThredList) {
+			wordCounterThred.start();						// DINNER STARTS
+		}
+		
+		//wordCounterIns1.buildRowsArrayList(arrayOfWords);
+		ArrayList<Row> countedListOfRows = wordCounterIns1.countWords();
+		
+		for (Row rowlocal : countedListOfRows) {
+			System.out.println(rowlocal.getWord() + "\t" + rowlocal.getCount());
+		}
+		
+		
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+package lt.and.pac.textwordcounter;
+
+import java.util.ArrayList;
+
+public class TextWordCounter {
+
+	public static void main(String[] args) {
+	
+		String filesText = new String();
+		ArrayList<WordCounter> wordCounterThredList = new ArrayList<>();
+		String parentDirectoryStr = ParentDirectoryFinder.findParantDirectory();
+		
+			//Reads all txt files into single string
+		MyFileReader fileReaderIns = new MyFileReader(parentDirectoryStr);
+		fileReaderIns.buildFileList();
+		filesText = fileReaderIns.readAllTxtFiles();
+		
+		System.out.println("All txt files appended to one string: ");
+		System.out.println(filesText);
+		System.out.println();
+		
+		String[] arrayOfWords = WordSeparator.separateWords(filesText);
+		
+		WordCounter wordCounterIns1 = new WordCounter(parentDirectoryStr, 'A', 'G', arrayOfWords);
+		WordCounter wordCounterIns2 = new WordCounter(parentDirectoryStr, 'H', 'N', arrayOfWords);
+		WordCounter wordCounterIns3 = new WordCounter(parentDirectoryStr, 'O', 'U', arrayOfWords);
+		WordCounter wordCounterIns4 = new WordCounter(parentDirectoryStr, 'V', 'Z', arrayOfWords);
+		
+		wordCounterThredList.add(wordCounterIns1);
+		wordCounterThredList.add(wordCounterIns2);
+		wordCounterThredList.add(wordCounterIns3);
+		wordCounterThredList.add(wordCounterIns4);
+		
+			// multithredning SARTS 
+		for (WordCounter wordCounterThred : wordCounterThredList) {
+			wordCounterThred.start();					
+		}
+    }
+}
+
+
+
+
+
+

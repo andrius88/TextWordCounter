@@ -1,0 +1,11 @@
+package lt.and.pac;
+
+public class WordSeparator {
+	
+	public static String[] separateWorls(String fileTextIn){
+		
+		String[] arrayOfWords = fileTextIn.split("\\.|\\,|'|;|\\s+"); 	// splits words by whitespace and others
+		return arrayOfWords;
+	}
+
+}

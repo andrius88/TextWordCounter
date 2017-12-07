@@ -1,0 +1,84 @@
+package lt.and.pac;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class WordCounter extends Thread{
+	
+	private Thread threadIns;
+	private String thredName;
+	
+	private Character sratChar;
+	private Character endChar;
+	private ArrayList<Row> listOfRows;
+	private ArrayList<Row> countedListOfRows;
+	
+	public WordCounter(char sratChar, char endChar){
+		this.sratChar = sratChar;
+		this.endChar = endChar;
+		this.listOfRows = new ArrayList<>();
+		this.thredName = sratChar + "-" + endChar;
+		this.countedListOfRows = new ArrayList<>();
+	}
+
+	public void run() {
+		
+	}
+
+	public void start () {
+	      
+	      if (threadIns == null) {
+	    	  threadIns = new Thread (this);
+	    	  threadIns.start ();
+	      }
+		}
+	
+	public void buildRowsArrayList(String[] arrayOfWordsIn){
+		
+		String currentWord = new String();
+		
+		for (int i=0; i<arrayOfWordsIn.length; i++){
+			currentWord = arrayOfWordsIn[i];
+			if (!currentWord.isEmpty()){
+				if (currentWord.charAt(0) >= sratChar && currentWord.charAt(0) <= endChar
+					|| currentWord.charAt(0) >= Character.toLowerCase(sratChar)  
+					&& currentWord.charAt(0) <= Character.toLowerCase(endChar)){
+					Row newRow = new Row (currentWord, 1);
+					listOfRows.add(newRow);
+				}
+			}
+		}
+		
+		/*for(Row row : ListOfRows){
+			System.out.println(row.getWord() + " " + row.getCount());
+		}*/
+		
+		//return ListOfRows;
+	}
+	
+	public ArrayList<Row> countWords(){
+		
+		String currentWord = new String();
+		int currentCount = 0;
+		
+		for (int i=0; i<listOfRows.size(); i++){
+			if (!listOfRows.get(i).getWord().isEmpty()){
+				currentWord = listOfRows.get(i).getWord();
+				currentCount = 1;
+				Row newRow = new Row(currentWord, currentCount);
+			
+				for (int j=i+1; j<listOfRows.size(); j++){
+					if (!currentWord.toString().isEmpty() 
+						&& Objects.equals(currentWord.toString(), listOfRows.get(j).getWord().toString())){
+						
+						newRow.increment();
+						listOfRows.get(j).deleteWord();
+						listOfRows.get(j).deleteCount();
+					}
+				}
+				countedListOfRows.add(newRow);
+			}
+		}	
+		return countedListOfRows;
+	}
+}

@@ -1,0 +1,25 @@
+package lt.and.pac;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class MyFileWriter {
+
+		private String fileName;
+		private String pathOfProject;
+		
+		
+	 
+	    public void writeOneFile(String[] args) {
+	        try {
+	            FileWriter writer = new FileWriter("MyFile.txt", true);
+	            writer.write("Hello World");
+	            writer.write("\r\n");   // write new line
+	            writer.write("Good Bye!");
+	            writer.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
